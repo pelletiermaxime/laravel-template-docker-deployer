@@ -20,6 +20,13 @@ a system to ask questions and let you customize some stuff based on your prefere
 
 * Add config in webpack.mix.js to extract vue and axios.
 
+### Redis
+
+* Add predis to composer.json
+* Set cache and session driver to redis in .env.example
+* Setup a different redis connection for sessions so that when you call
+artisan cache:clear it doesn't delete your session. See <a href="http://stackoverflow.com/a/38673140">this stack overflow answer</a> for details.
+
 ## How to use it
 
 * Remove everything above these ↓lines↓ and customize the rest for your project.
