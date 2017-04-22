@@ -1,6 +1,6 @@
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
-# Laravel starter kit
+# Laravel 5.4 starter kit
 
 ## Why ?
 
@@ -22,10 +22,16 @@ a system to ask questions and let you customize some stuff based on your prefere
 
 ### Redis
 
-* Add predis to composer.json
+* Added predis to composer.json
 * Set cache and session driver to redis in .env.example
 * Setup a different redis connection for sessions so that when you call
 artisan cache:clear it doesn't delete your session. See <a href="http://stackoverflow.com/a/38673140">this stack overflow answer</a> for details.
+
+### Composer tasks
+
+* Removed the post create project as this is meant to just be cloned, not create-projected.
+* Added setup-local task
+* Added setup-deps task
 
 ## How to use it
 
@@ -38,9 +44,14 @@ artisan cache:clear it doesn't delete your session. See <a href="http://stackove
 ## Setup the project locally
 
 * Install Composer and Yarn globally on your system. Google it.
-* Install the Composer and Yarn dependencies
+* Install the Composer and Yarn dependencies via the setup-deps task:
 
 ```bash
-composer install
-yarn
+composer setup-deps
+```
+
+* Create the .env and fill the key
+
+```bash
+composer setup-local
 ```
