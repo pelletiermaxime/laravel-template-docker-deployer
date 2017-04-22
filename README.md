@@ -18,7 +18,7 @@ a system to ask questions and let you customize some stuff based on your prefere
 
 ### Laravel Mix
 
-* Add config in webpack.mix.js to extract vue and axios.
+* Added config in webpack.mix.js to extract vue and axios.
 
 ### Redis
 
@@ -37,6 +37,11 @@ artisan cache:clear it doesn't delete your session. See <a href="http://stackove
 ### Deployer config
 
 * Added a Deployer config in the "scripts" folder.
+
+### Editorconfig file
+
+Added simple editorconfig file with basic rules that are a good starting point
+if you don't have specific code reformater like phpcs or standard.
 
 ## How to use it
 
