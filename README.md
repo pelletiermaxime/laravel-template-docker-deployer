@@ -37,6 +37,7 @@ artisan cache:clear it doesn't delete your session. See <a href="http://stackove
 ### Deployer config
 
 * Added a Deployer config in the "scripts" folder.
+* Added database sync commands to make it easy to install locally a MySQL database from a remote server.
 
 ### Editorconfig file
 
