@@ -41,7 +41,12 @@ artisan cache:clear it doesn't delete your session. See <a href="http://stackove
 ### Editorconfig file
 
 Added simple editorconfig file with basic rules that are a good starting point
-if you don't have specific code reformater like phpcs or standard.
+if you don't have specific code reformater like phpcs or standard configured.
+
+### Standard
+
+Reformated the basic app.js and bootsrap.js to follow the Javascript Standard Style, added standard to package.json
+and configured it (in package.json) to accept global instances of Vue, JQuery and Lodash.
 
 ## How to use it
 
