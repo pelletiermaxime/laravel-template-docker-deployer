@@ -32,9 +32,15 @@ artisan cache:clear it doesn't delete your session. See <a href="http://stackove
 * Removed the post create project as this is meant to just be cloned, not create-projected.
 * Added setup-local task
 * Added setup-deps task
+* Added deploy task mainly to show how to deploy.
+
+### Deployer config
+
+* Added a Deployer config in the "scripts" folder.
 
 ## How to use it
 
+* Customize scripts/deploy.php with your server info, deploy_path and the command to reload php-fpm (to clear opcode caches).
 * Remove everything above these ↓lines↓ and customize the rest for your project.
 
 ===============================================================
@@ -44,6 +50,8 @@ artisan cache:clear it doesn't delete your session. See <a href="http://stackove
 ## Setup the project locally
 
 * Install Composer and Yarn globally on your system. Google it.
+* Add "~/.composer/vendor/bin" or "~/.config/composer/vendor/bin" (find where it is via `composer global config --list | grep bin-dir`
+) and "vendor/bin" to your $PATH.
 * Install the Composer and Yarn dependencies via the setup-deps task:
 
 ```bash
@@ -54,4 +62,20 @@ composer setup-deps
 
 ```bash
 composer setup-local
+```
+
+## Deploy
+
+Theres a composer task named "deploy", but I suggest just entering the scripts dir and calling vendor/bin/dep inside.
+
+```bash
+cd scripts
+dep deploy production
+```
+
+I suggest creating a 'deploy' user on the server and then giving him sudo access to reload php-fpm:
+
+/etc/sudoers.d/deploy
+```
+deploy ALL=(ALL) NOPASSWD:/bin/systemctl reload php7.1-fpm.service
 ```

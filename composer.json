@@ -42,8 +42,12 @@
             "php artisan key:generate"
         ],
         "setup-deps": [
+            "cd scripts && composer install",
             "composer install",
             "yarn"
+        ],
+        "deploy": [
+            "cd scripts && vendor/bin/dep"
         ]
     },
     "config": {
