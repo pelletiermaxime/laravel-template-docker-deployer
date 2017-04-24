@@ -8,3 +8,4 @@
 /storage
 /vendor
 .env
+.php_cs.cache

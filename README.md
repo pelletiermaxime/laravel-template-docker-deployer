@@ -33,6 +33,7 @@ artisan cache:clear it doesn't delete your session. See <a href="http://stackove
 * Added setup-local task
 * Added setup-deps task
 * Added deploy task mainly to show how to deploy.
+* Added cs and cs-fixer to call phpcs and php-cs-fixer
 
 ### Deployer config
 
@@ -49,9 +50,16 @@ if you don't have specific code reformater like phpcs or standard configured.
 Reformated the basic app.js and bootsrap.js to follow the Javascript Standard Style, added standard to package.json
 and configured it (in package.json) to accept global instances of Vue, JQuery and Lodash.
 
+### PHP CS
+
+* Added phpcs and php-cs-fixer to composer.json
+* Added .php_cs and phpcs.xml config files
+* Added composer tasks
+
 ## How to use it
 
 * Customize scripts/deploy.php with your server info, deploy_path and the command to reload php-fpm (to clear opcode caches).
+* Customize phpcs rules in .php_cs and phpcs.xml
 * Remove everything above these ↓lines↓ and customize the rest for your project.
 
 ===============================================================
@@ -61,8 +69,8 @@ and configured it (in package.json) to accept global instances of Vue, JQuery an
 ## Setup the project locally
 
 * Install Composer and Yarn globally on your system. Google it.
-* Add "~/.composer/vendor/bin" or "~/.config/composer/vendor/bin" (find where it is via `composer global config --list | grep bin-dir`
-) and "vendor/bin" to your $PATH.
+* Add `~/.composer/vendor/bin` or `~/.config/composer/vendor/bin` (find where it is via `composer global config --list | grep bin-dir`
+) and `vendor/bin` to your $PATH.
 * Install the Composer and Yarn dependencies via the setup-deps task:
 
 ```bash
