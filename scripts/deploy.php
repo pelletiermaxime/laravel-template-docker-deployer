@@ -44,7 +44,9 @@ task('deploy', [
     'artisan:vendor:publish',
     'yarn-webpack',
     'deploy:symlink',
-    'php-fpm:restart',
+    // 'php-fpm:restart',
+    'opcache:clear',
+    'opcache:optimize',
     'deploy:unlock',
     'cleanup',
     'success'

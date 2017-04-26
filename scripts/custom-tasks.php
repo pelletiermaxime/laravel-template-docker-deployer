@@ -22,3 +22,11 @@ task('artisan:vendor:publish', function () {
 task('artisan:key:generate', function () {
     run('{{bin/php}} {{release_path}}/artisan key:generate');
 })->desc('Execute artisan key:generate');
+
+task('artisan:opcache:clear', function () {
+    run('{{bin/php}} {{release_path}}/artisan opcache:clear');
+})->desc('Execute artisan opcache:clear');
+
+task('artisan:opcache:optimize', function () {
+    run('{{bin/php}} {{release_path}}/artisan opcache:optimize');
+})->desc('Execute artisan opcache:optimize');

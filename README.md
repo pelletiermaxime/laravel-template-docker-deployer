@@ -92,7 +92,9 @@ cd scripts
 dep deploy production
 ```
 
-I suggest creating a 'deploy' user on the server and then giving him sudo access to reload php-fpm:
+By default the deploy scripts clears PHP's Opcode Cache via a command `opcache:clear` defined by the `laravel-opcache` package.
+If for some reason this doesn't work for you, you can configure the reload php-fpm task in the custom-tasks file.
+In that case I suggest creating a 'deploy' user on the server and then giving him sudo access to reload php-fpm:
 
 /etc/sudoers.d/deploy
 ```
