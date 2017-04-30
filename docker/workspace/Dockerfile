@@ -69,12 +69,15 @@ RUN chown -R laradock:laradock /home/laradock/.composer
 USER laradock
 
 # Check if global install need to be ran
-ARG COMPOSER_GLOBAL_INSTALL=false
 ENV COMPOSER_GLOBAL_INSTALL ${COMPOSER_GLOBAL_INSTALL}
 RUN if [ ${COMPOSER_GLOBAL_INSTALL} = true ]; then \
     # run the install
     composer global install \
 ;fi
+
+# Export composer vendor path
+RUN echo "" >> ~/.bashrc && \
+echo 'export PATH="~/.composer/vendor/bin:$PATH"' >> ~/.bashrc
 
 #####################################
 # Crontab
@@ -82,6 +85,24 @@ RUN if [ ${COMPOSER_GLOBAL_INSTALL} = true ]; then \
 USER root
 
 COPY ./crontab /var/spool/cron/crontabs
+RUN chmod -R 644 /etc/cron.d
+
+#####################################
+# User Aliases
+#####################################
+
+USER laradock
+COPY ./aliases.sh /home/laradock/aliases.sh
+RUN echo "" >> ~/.bashrc && \
+    echo "# Load Custom Aliases" >> ~/.bashrc && \
+    echo "source /home/laradock/aliases.sh" >> ~/.bashrc && \
+    echo "" >> ~/.bashrc
+
+USER root
+RUN echo "" >> ~/.bashrc && \
+    echo "# Load Custom Aliases" >> ~/.bashrc && \
+    echo "source /home/laradock/aliases.sh" >> ~/.bashrc && \
+    echo "" >> ~/.bashrc
 
 #####################################
 # xDebug:
@@ -99,41 +120,20 @@ RUN if [ ${INSTALL_XDEBUG} = true ]; then \
 COPY ./xdebug.ini /etc/php/7.1/cli/conf.d/xdebug.ini
 
 #####################################
-# ssh:
-#####################################
-ARG INSTALL_WORKSPACE_SSH=false
-ENV INSTALL_WORKSPACE_SSH ${INSTALL_WORKSPACE_SSH}
-
-ADD insecure_id_rsa /tmp/id_rsa
-ADD insecure_id_rsa.pub /tmp/id_rsa.pub
-
-RUN if [ ${INSTALL_WORKSPACE_SSH} = true ]; then \
-    rm -f /etc/service/sshd/down && \
-    cat /tmp/id_rsa.pub >> /root/.ssh/authorized_keys \
-        && cat /tmp/id_rsa.pub >> /root/.ssh/id_rsa.pub \
-        && cat /tmp/id_rsa >> /root/.ssh/id_rsa \
-        && rm -f /tmp/id_rsa* \
-        && chmod 644 /root/.ssh/authorized_keys /root/.ssh/id_rsa.pub \
-    && chmod 400 /root/.ssh/id_rsa \
-;fi
-
-#####################################
 # Node / NVM:
 #####################################
 
 # Check if NVM needs to be installed
-ARG NODE_VERSION=stable
-ENV NODE_VERSION ${NODE_VERSION}
 ARG INSTALL_NODE=false
 ENV INSTALL_NODE ${INSTALL_NODE}
 ENV NVM_DIR /home/laradock/.nvm
 RUN if [ ${INSTALL_NODE} = true ]; then \
     # Install nvm (A Node Version Manager)
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.6/install.sh | bash && \
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash && \
         . $NVM_DIR/nvm.sh && \
-        nvm install ${NODE_VERSION} && \
-        nvm use ${NODE_VERSION} && \
-        nvm alias ${NODE_VERSION} && \
+        nvm install --lts && \
+        nvm use --lts && \
+        nvm alias default node && \
         npm install -g gulp bower vue-cli \
 ;fi
 
