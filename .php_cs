@@ -9,6 +9,18 @@ return PhpCsFixer\Config::create()
         '@PSR2'                           => true,
         '@Symfony'                        => true,
         '@PHP71Migration'                 => true,
+        'array_syntax'                    => [
+            'syntax' => 'short',
+        ],
+        'binary_operator_spaces'          => [
+            'default' => 'align_single_space',
+        ],
+        'cast_spaces'                     => true,
+        'concat_space'                    => [
+            'spacing' => 'one',
+        ],
+        'declare_strict_types'            => true,
+        'no_unused_imports'               => true,
         'ordered_class_elements'          => [
             'use_trait',
             'constant_public',
@@ -25,14 +37,6 @@ return PhpCsFixer\Config::create()
             'method_protected',
             'method_private',
         ],
-        'array_syntax'                    => [
-            'syntax' => 'short',
-        ],
-        'cast_spaces'                     => true,
-        'concat_space'                    => [
-            'spacing' => 'one',
-        ],
-        'no_unused_imports'               => true,
         'ordered_imports'                 => true,
         'phpdoc_align'                    => true,
         'phpdoc_single_line_var_spacing'  => true,
@@ -40,13 +44,12 @@ return PhpCsFixer\Config::create()
             'space_before' => 'none',
         ],
         'self_accessor'                   => true,
-        'single_quote'                    => true,
         'short_scalar_cast'               => true,
+        'single_quote'                    => true,
         'standardize_not_equals'          => true,
         'trailing_comma_in_multiline_array' => true,
         'trim_array_spaces'               => true,
         'whitespace_after_comma_in_array' => true,
-        'declare_strict_types'            => true,
     ])
     ->setFinder($finder)
     ->setUsingCache(true)
