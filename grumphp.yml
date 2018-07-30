@@ -3,4 +3,5 @@ parameters:
     bin_dir: vendor/bin
     tasks:
         phpcs: ~
-        phpcsfixer2: ~
+        phpcsfixer2:
+            config: .php_cs
